@@ -1,0 +1,4 @@
+vidgear[asyncio, core]
+opencv-python
+environs
+uvicorn
