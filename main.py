@@ -1,3 +1,5 @@
+"""Peek-a-boo: A simple dockerized service exposing a videofeed through
+WebRTC via a HTTP frontend"""
 import atexit
 import logging
 
