@@ -5,6 +5,7 @@ import logging
 
 import uvicorn
 from environs import Env
+from vidgear.gears.camgear import CamGear
 from vidgear.gears.asyncio import WebGear_RTC
 
 env = Env()
@@ -15,14 +16,19 @@ LOG_LEVEL = env.log_level("LOG_LEVEL", "WARNING")
 # Set logging level
 logging.basicConfig(level=LOG_LEVEL)
 
+# Open camera stream
+cam = CamGear(source=SOURCE, logging=LOG_LEVEL <= logging.INFO)
+logging.info("Connected camera has framerate: %s", cam.framerate)
+
 # Set some available options
 options = {
     "frame_size_reduction": FRAME_SIZE_REDUCTION,
     "enable_live_broadcast": True,
+    "custom_stream": cam,
 }
 
 # initialize WebGear_RTC app
-web = WebGear_RTC(source=SOURCE, logging=True, **options)
+web = WebGear_RTC(logging=LOG_LEVEL <= logging.INFO, **options)
 
 # close app safely
 atexit.register(web.shutdown)
