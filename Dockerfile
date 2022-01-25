@@ -1,7 +1,5 @@
 FROM python:3.9-slim
 
-RUN apt-get update && apt-get install --no-install-recommends -y ffmpeg && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
@@ -9,8 +7,9 @@ COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
 COPY main.py main.py
+COPY index.html index.html
+COPY client.js client.js
 
-EXPOSE 80
+EXPOSE 8000
 
-# CMD ["/bin/sh"]
-CMD ["python3", "main.py"]
+ENTRYPOINT ["python3", "main.py", "--port", "8000"]
