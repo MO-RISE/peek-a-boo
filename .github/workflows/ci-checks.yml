@@ -26,6 +26,3 @@ jobs:
     - name: Run black
       run: |
         black --check main.py
-    - name: Run pylint
-      run: |
-        pylint main.py
