@@ -7,13 +7,12 @@ version: '3'
 services:
 
   peek-a-boo:
-    build:
-      context: .
+    image: ghcr.io/mo-rise/peek-a-boo:latest
     ports:
       - 8000:8000
     command: [ "--play-from", "rtsp://rtsp.stream/pattern" ]
 ```
 
-Head to http://localhost:8000 which should yield:
+Head to http://localhost:8000 and click the `start`button which should (after a few seconds) yield:
 
 ![](screenshot.PNG)
